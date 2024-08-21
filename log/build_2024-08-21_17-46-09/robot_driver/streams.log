@@ -1,0 +1,42 @@
+[0.078s] Invoking command in '/home/ahmad/InmindFinal/build/robot_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ahmad/InmindFinal/src/robot_driver -DCMAKE_INSTALL_PREFIX=/home/ahmad/InmindFinal/install/robot_driver
+[0.671s] -- The C compiler identification is GNU 11.4.0
+[1.809s] -- The CXX compiler identification is GNU 11.4.0
+[2.632s] -- Detecting C compiler ABI info
+[2.980s] -- Detecting C compiler ABI info - done
+[2.990s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.991s] -- Detecting C compile features
+[2.992s] -- Detecting C compile features - done
+[3.000s] -- Detecting CXX compiler ABI info
+[3.260s] -- Detecting CXX compiler ABI info - done
+[3.269s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[3.270s] -- Detecting CXX compile features
+[3.271s] -- Detecting CXX compile features - done
+[3.361s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[3.638s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[3.897s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[4.085s] -- Added test 'lint_cmake' to check CMake code style
+[4.089s] -- Added test 'xmllint' to check XML markup files
+[4.093s] -- Configuring done
+[4.101s] -- Generating done
+[4.102s] -- Build files have been written to: /home/ahmad/InmindFinal/build/robot_driver
+[4.112s] Invoked command in '/home/ahmad/InmindFinal/build/robot_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ahmad/InmindFinal/src/robot_driver -DCMAKE_INSTALL_PREFIX=/home/ahmad/InmindFinal/install/robot_driver
+[4.115s] Invoking command in '/home/ahmad/InmindFinal/build/robot_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ahmad/InmindFinal/build/robot_driver -- -j12 -l12
+[4.162s] Invoked command in '/home/ahmad/InmindFinal/build/robot_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ahmad/InmindFinal/build/robot_driver -- -j12 -l12
+[4.202s] Invoking command in '/home/ahmad/InmindFinal/build/robot_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ahmad/InmindFinal/build/robot_driver
+[4.211s] -- Install configuration: ""
+[4.213s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/ament_index/resource_index/package_run_dependencies/robot_driver
+[4.213s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/ament_index/resource_index/parent_prefix_path/robot_driver
+[4.214s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/environment/ament_prefix_path.sh
+[4.215s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/environment/ament_prefix_path.dsv
+[4.215s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/environment/path.sh
+[4.215s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/environment/path.dsv
+[4.216s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/local_setup.bash
+[4.216s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/local_setup.sh
+[4.216s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/local_setup.zsh
+[4.217s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/local_setup.dsv
+[4.217s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/package.dsv
+[4.217s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/ament_index/resource_index/packages/robot_driver
+[4.218s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/cmake/robot_driverConfig.cmake
+[4.218s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/cmake/robot_driverConfig-version.cmake
+[4.218s] -- Installing: /home/ahmad/InmindFinal/install/robot_driver/share/robot_driver/package.xml
+[4.221s] Invoked command in '/home/ahmad/InmindFinal/build/robot_driver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ahmad/InmindFinal/build/robot_driver
