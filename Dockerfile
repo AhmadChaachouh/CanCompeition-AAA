@@ -1,31 +1,35 @@
-# Start with a base image
-FROM ubuntu:22.04
+# Use the official ROS Galactic base image
+FROM osrf/ros:galactic-desktop
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
+# Install additional dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     git \
-    curl \
-    wget \
-    python3 \
-    python3-pip \
+    libboost-system-dev \
+    libboost-thread-dev \
+    liblog4cpp5-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a working directory
 WORKDIR /app
 
-# Copy files into the container
+# Clone and build BehaviorTree.CPP
+RUN git clone https://github.com/BehaviorTree/BehaviorTree.CPP.git \
+    && cd BehaviorTree.CPP \
+    && mkdir build && cd build \
+    && cmake .. \
+    && make \
+    && make install
+
+# Copy your application files into the container
 COPY . /app
 
-# Install Python dependencies (if applicable)
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-# Build your project (if applicable)
-# RUN make or cmake ..
+# Build your application (assuming it uses BehaviorTree.CPP)
+RUN cmake . && make
 
 # Set the command to run your application
 CMD ["./your_executable"]
