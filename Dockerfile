@@ -25,6 +25,8 @@ RUN git clone https://github.com/BehaviorTree/BehaviorTree.CPP.git \
     && make \
     && make install
 
+RUN colcon build
+RUN source install/setup.bash
 # Copy your application files into the container
 COPY . /app
 
