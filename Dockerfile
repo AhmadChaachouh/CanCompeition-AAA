@@ -1,34 +1,46 @@
-# Start with a base image
-FROM ubuntu:22.04
+# Stage 1: Python dependencies
+FROM python:3.9-slim as python-base
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt 
+
+# Stage 2: Official ROS 2 Galactic base image
+FROM ros:galactic-ros-base as ros2-base
+
+
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
+ENV ROS_DISTRO=galactic
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    cmake \
-    git \
-    curl \
-    wget \
-    python3 \
-    python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+# Install necessary ROS 2 packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	ros-${ROS_DISTRO}-cv-bridge \
+	ros-${ROS_DISTRO}-image-transport \
+	ros-${ROS_DISTRO}-geometry-msgs \
+	ros-${ROS_DISTRO}-sensor-msgs \
+	ros-${ROS_DISTRO}-rclpy \
+	ros-${ROS_DISTRO}-laser-proc \
+	&& rm -rf /var/lib/apt/lists/*
 
-# Create a working directory
-WORKDIR /app
+# Copy the Python dependencies from the first stage
+COPY --from=python-base /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=python-base /usr/local/bin /usr/local/bin
 
-# Copy files into the container
-COPY . /app
+# Create a workspace
+WORKDIR /ros2_ws/src
 
-# Install Python dependencies (if applicable)
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Copy ROS 2 package into the workspace
+COPY ./src/qr_code_finder .
 
-# Build your project (if applicable)
-# RUN make or cmake ..
+# Build the workspace
+WORKDIR /ros2_ws
+RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build
 
-# Set the command to run your application
-CMD ["./your_executable"]
+# Source the workspace
+RUN echo "source /ros2_ws/install/setup.bash" >> /root/.bashrc
 
-# Or for a Python app, you might use:
-# CMD ["python3", "your_script.py"]
+# Set the entrypoint
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["bash", "-c", "source /ros2_ws/install/setup.bash && ros2 run qr_code_finder qr_code_detector"]
