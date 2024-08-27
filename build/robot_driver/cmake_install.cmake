@@ -1,8 +1,8 @@
-# Install script for directory: /home/ahmad/InmindFinal/src/robot_driver
+# Install script for directory: /home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/robot_driver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/ahmad/InmindFinal/install/robot_driver")
+  set(CMAKE_INSTALL_PREFIX "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/install/robot_driver")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,11 +43,11 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_driver")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_driver")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_driver")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_driver")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -55,7 +55,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver/environment" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver/environment" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/ament_prefix_path.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -63,42 +63,42 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver/environment" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver/environment" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/path.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/local_setup.bash")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/local_setup.bash")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/local_setup.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/local_setup.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/local_setup.zsh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/local_setup.zsh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/local_setup.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/local_setup.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_environment_hooks/package.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_environment_hooks/package.dsv")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/packages/robot_driver")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_index/share/ament_index/resource_index/packages/robot_driver")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver/cmake" TYPE FILE FILES
-    "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_core/robot_driverConfig.cmake"
-    "/home/ahmad/InmindFinal/build/robot_driver/ament_cmake_core/robot_driverConfig-version.cmake"
+    "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_core/robot_driverConfig.cmake"
+    "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/ament_cmake_core/robot_driverConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/ahmad/InmindFinal/src/robot_driver/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robot_driver" TYPE FILE FILES "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/robot_driver/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -109,5 +109,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ahmad/InmindFinal/build/robot_driver/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

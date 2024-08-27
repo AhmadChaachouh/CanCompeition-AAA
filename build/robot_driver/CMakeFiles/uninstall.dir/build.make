@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ahmad/InmindFinal/src/robot_driver
+CMAKE_SOURCE_DIR = /home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/robot_driver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ahmad/InmindFinal/build/robot_driver
+CMAKE_BINARY_DIR = /home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/ahmad/InmindFinal/build/robot_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ahmad/InmindFinal/src/robot_driver /home/ahmad/InmindFinal/src/robot_driver /home/ahmad/InmindFinal/build/robot_driver /home/ahmad/InmindFinal/build/robot_driver /home/ahmad/InmindFinal/build/robot_driver/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/robot_driver /home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/robot_driver /home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver /home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver /home/anthony/Desktop/FinalProject/CanCompeition-AAA/build/robot_driver/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 
