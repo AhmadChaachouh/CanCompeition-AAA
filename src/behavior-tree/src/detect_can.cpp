@@ -1,7 +1,7 @@
 #include "behavior-tree/detect_can.hpp"
 
 DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &config)
-    : BT::SyncActionNode(name, config)
+    : BT::ActionNodeBase(name, config)
 {
     node_ = rclcpp::Node::make_shared("detect_can");
 

@@ -4,7 +4,7 @@
   <name>behavior-tree</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="ahmad.chaachouh.cad@gmail.com">ahmad</maintainer>
+  <maintainer email="anthony.bassil3@net.usj.edu.lb">anthony</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -16,6 +16,10 @@
   <depend>geometry_msgs</depend>
   <depend>behaviortree_cpp_v3</depend>
 
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 

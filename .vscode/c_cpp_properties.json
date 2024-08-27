@@ -7,7 +7,11 @@
       },
       "includePath": [
         "/opt/ros/humble/include/**",
+<<<<<<< HEAD
         "/home/ahmad/InmindFinal/src/robot_driver/include/**",
+=======
+        "/home/anthony/Desktop/FinalProject/CanCompeition-AAA/src/pepsi_detector/include/**",
+>>>>>>> origin/main
         "/usr/include/**"
       ],
       "name": "ROS",

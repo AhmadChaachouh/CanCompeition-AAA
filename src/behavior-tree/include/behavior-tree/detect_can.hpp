@@ -8,7 +8,7 @@
 //#include <cv_bridge/cv_bridge.h>
 //#include <opencv2/opencv.hpp>
 
-class DetectCan : public BT::SyncActionNode
+class DetectCan : public BT::ActionNodeBase
 {
 public:
     DetectCan(const std::string &name, const BT::NodeConfiguration &config);

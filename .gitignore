@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 build/ 
 install/
 log/
 .gitignore
+=======
+build/
+install/
+log/
+>>>>>>> origin/main

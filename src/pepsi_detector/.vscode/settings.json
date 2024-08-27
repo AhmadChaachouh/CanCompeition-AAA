@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ahmad/InmindFinal/install/qr_code_finder/lib/python3.10/site-packages",
+        "/home/ahmad/InmindFinal/install/pepsi_detection_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ahmad/InmindFinal/install/qr_code_finder/lib/python3.10/site-packages",
+        "/home/ahmad/InmindFinal/install/pepsi_detection_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
