@@ -1,0 +1,28 @@
+<root main_tree_to_execute = "MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <Fallback>
+                    <Action ID="DetectCan" is_can_detected="{can}"/>
+                    <Condition ID="CanDetected" is_can_detected="{can}"/>
+                </Fallback>
+                <Sequence>
+                    <Fallback>
+                        <Condition ID="CanApproached"/>
+                            <Action ID="ApproachCan"/>
+                    </Fallback>
+                    <!-- <Fallback Name="GrabCan">
+                        <Condition ID="CanGripped"/>
+                        <Action ID="GrabCan"/>
+                    </Fallback> -->
+                </Sequence>
+                <!-- <Sequence Name="QRcodeDetection">
+                    <Fallback Name="QRDetection">
+                        <Condition Name="QrCodeDetected"/>
+                        <Action Name="DetectQrCode"/>
+                    </Fallback>
+                </Sequence> -->
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+</root>
