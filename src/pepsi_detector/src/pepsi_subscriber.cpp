@@ -26,6 +26,16 @@ public:
 
         // Create a publisher for velocity commands
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
+
+        // Declare parameters with default values
+        this->declare_parameter<float>("center_x", 960.0);
+        this->declare_parameter<float>("rotation_speed", 0.3);
+        this->declare_parameter<float>("min_distance_threshold", 0.6);
+
+        // Get the parameter values
+        this->get_parameter("center_x", center_x);
+        this->get_parameter("rotation_speed", rotation_speed);
+        this->get_parameter("min_distance_threshold", min_distance_threshold);
     }
 
 private:
@@ -33,6 +43,10 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr pepsi_coord_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr pepsi_status_sub_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+
+    float center_x ;
+    float rotation_speed ;
+    float min_distance_threshold ;
 
     // LaserScan variables
     std::vector<float> laser_scan_ranges_;
@@ -75,9 +89,7 @@ private:
     void control_robot()
 {
     auto cmd = geometry_msgs::msg::Twist();
-    float center_x = 1920 / 2;  // Adjust based on your camera resolution
-    float rotation_speed = 0.3;
-    float min_distance_threshold = 0.6;  // 1 meter threshold for stopping
+    
 
     // Check if the robot is too close to any obstacle
     if (!laser_scan_ranges_.empty()) {
