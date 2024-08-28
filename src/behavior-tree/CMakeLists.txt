@@ -11,6 +11,8 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+# find_package(example_interfaces REQUIRED)
+find_package(robot_hardware_interfaces REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(rclcpp_action REQUIRED)
@@ -28,7 +30,9 @@ include_directories(
   ${sensor_msgs_INCLUDE_DIRS}
   ${nav_msgs_INCLUDE_DIRS}
   ${std_msgs_INCLUDE_DIRS}
+  ${robot_hardware_interfaces_INCLUDE_DIRS}
   ${behaviortree_cpp_v3_INCLUDE_DIRS}
+  # ${example_interfaces_INCLUDE_DIRS}
 )
 
 #add_executable(detect_can src/detect_can.cpp)
@@ -57,6 +61,8 @@ ament_target_dependencies(main
   std_msgs
   sensor_msgs
   geometry_msgs
+  # example_interfaces
+  robot_hardware_interfaces
   nav_msgs
   action_msgs
   rclcpp_action

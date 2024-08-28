@@ -31,10 +31,12 @@ public:
         // Create a publisher for velocity commands
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
 
+        tree_pub_ = this->create_publisher<std_msgs::msg::Bool>("can_status", 10);
+
         // Declare parameters with default values
         this->declare_parameter<float>("center_x", 960.0);
         this->declare_parameter<float>("rotation_speed", 0.3);
-        this->declare_parameter<float>("min_distance_threshold", 0.6);
+        this->declare_parameter<float>("min_distance_threshold", 6);
 
         // Get the parameter values
         this->get_parameter("center_x", center_x);
@@ -47,6 +49,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr pepsi_coord_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr pepsi_status_sub_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+    rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr tree_pub_;
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr subscription_;
 
     float center_x ;
@@ -112,6 +115,10 @@ private:
                     cmd.angular.z = -0.01;
                 } else {
                     cmd.angular.z = 0.0;
+                    // SUCCESS
+                    std_msgs::msg::Bool bool_msg;
+                    bool_msg.data = true;
+                    tree_pub_->publish(bool_msg);
             }
         } else {
             // If Pepsi can is found

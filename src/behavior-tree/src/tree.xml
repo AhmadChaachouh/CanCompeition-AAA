@@ -5,21 +5,12 @@
                 <Fallback>
                     <Action ID="DetectCan"/>
                 </Fallback>
-                <Sequence>
-                    <Fallback>
-                        <Action ID="ApproachCan"/>
-                    </Fallback>
-                    <!-- <Fallback Name="GrabCan">
-                        <Condition ID="CanGripped"/>
-                        <Action ID="GrabCan"/>
-                    </Fallback> -->
-                </Sequence>
-                <!-- <Sequence Name="QRcodeDetection">
-                    <Fallback Name="QRDetection">
-                        <Condition Name="QrCodeDetected"/>
-                        <Action Name="DetectQrCode"/>
-                    </Fallback>
-                </Sequence> -->
+                <Fallback>
+                    <Action ID="GripCan"/>
+                </Fallback>
+                <Fallback>
+                    <Action ID="DetectQRCode"/>
+                </Fallback>
             </Sequence>
         </Fallback>
     </BehaviorTree>

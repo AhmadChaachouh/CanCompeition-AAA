@@ -1,34 +1,26 @@
-#include "../include/behavior-tree/detect_can.hpp"
+#include "../include/behavior-tree/detect_qr_code.hpp"
 
-DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &config)
+DetectQRCode::DetectQRCode(const std::string &name, const BT::NodeConfiguration &config)
     : BT::SyncActionNode(name, config)
 {
-    node_ = rclcpp::Node::make_shared("detect_can");
-
-    tree_sub_ = node_->create_subscription<std_msgs::msg::Bool>(
-         "can_status", 10, std::bind(&DetectCan::treeCallback, this, std::placeholders::_1));
+    node_ = rclcpp::Node::make_shared("detect_qr_code");
 
     //Subscribe to the camera image topic
     //  image_subscription_ = node_->create_subscription<sensor_msgs::msg::Image>(
-    //      "/camera/image_raw", 10, std::bind(&DetectCan::imageCallback, this, std::placeholders::_1));
+    //      "/camera/image_raw", 10, std::bind(&DetectQRCode::imageCallback, this, std::placeholders::_1));
 
     //  Publisher for robot velocity commands
     // cmd_vel_publisher_ = node_->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
 
-    can_detected = false;
+    // bool qr_detected = true;
 }
 
-void DetectCan::treeCallback(const std_msgs::msg::Bool::SharedPtr msg){
-    bool ccan_detected = msg->data;
-    can_detected = ccan_detected;
-}
-
-BT::PortsList DetectCan::providedPorts()
+BT::PortsList DetectQRCode::providedPorts()
 {
     return {};
 }
 
-// void DetectCan::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
+// void DetectQRCode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 // {
 //     cv_bridge::CvImagePtr cv_ptr;
 
@@ -59,16 +51,16 @@ BT::PortsList DetectCan::providedPorts()
 //     cmd_vel_publisher_->publish(cmd_vel_msg);
 // }
 
-BT::NodeStatus DetectCan::tick()
+BT::NodeStatus DetectQRCode::tick()
 {
     std::string package_name, launch_file;
     package_name = "pepsi_detector";
-    launch_file = "pepsi_detection_launch.py";
+    launch_file = "qr_code_launch.py";
 
     // Construct the ROS2 launch command
     std::string command = "ros2 launch " + package_name + " " + launch_file;
 
-    RCLCPP_INFO(node_->get_logger(), "Launching file: ...");
+    RCLCPP_INFO(node_->get_logger(), "Launching QR file: ...");
     // std::cout << "Launching file: " << command << std::endl;
 
     // Launch the file using system call
@@ -77,21 +69,8 @@ BT::NodeStatus DetectCan::tick()
     // Check if the launch was successful
     if (result != 0)
     {
-        RCLCPP_INFO(node_->get_logger(), "Failed to launch file: ...");
+        RCLCPP_INFO(node_->get_logger(), "Failed to launch QR file: ...");
         // std::cerr << "Failed to launch file: " << command << std::endl;
-        return BT::NodeStatus::FAILURE;
-    }
-
-
-    while(!can_detected){
-        RCLCPP_INFO(node_->get_logger(), "Waiting for can detection...");
-        continue;
-    }
-    
-    if (can_detected){
-        return BT::NodeStatus::SUCCESS;
-    }
-    else{
         return BT::NodeStatus::FAILURE;
     }
 
@@ -99,6 +78,7 @@ BT::NodeStatus DetectCan::tick()
     // rclcpp::spin_some(node_);
     // RCLCPP_INFO(node_->get_logger(), "Can detected by detector");
     // BT::TreeNode::setOutput("is_can_detected", this->can_detected);
+    return BT::NodeStatus::SUCCESS;
 }
 
 // bool DetectCan::simulateCanDetection(const cv::Mat &image)

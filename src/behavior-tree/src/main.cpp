@@ -2,9 +2,10 @@
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <behaviortree_cpp_v3/xml_parsing.h>
 #include "./detect_can.cpp"
-#include "./approach_can.cpp"
+#include "./detect_qr_code.cpp"
+// #include "./approach_can.cpp"
 // #include "./can_approached.cpp"
-//#include "./grip_can.cpp"
+#include "./grip_can.cpp"
 //#include "./can_gripped.cpp"
 //#include "./detect_qr_code.cpp"
 //#include "./qr_code_detected.cpp"
@@ -22,8 +23,9 @@ int main(int argc, char **argv)
 
     // Register custom nodes
     factory.registerNodeType<DetectCan>("DetectCan");
-    factory.registerNodeType<ApproachCan>("ApproachCan");
-    //factory.registerNodeType<GripCan>("GripCan");
+    // factory.registerNodeType<ApproachCan>("ApproachCan");
+    factory.registerNodeType<GripCan>("GripCan");
+    factory.registerNodeType<DetectQRCode>("DetectQRCode");
     //factory.registerNodeType<CanGripped>("CanGripped");
     //factory.registerNodeType<DetectQrCode>("DetectQrCode");
     //factory.registerNodeType<QrCodeDetected>("QrCodeDetected");
