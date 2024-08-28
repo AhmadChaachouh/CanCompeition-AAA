@@ -29,6 +29,7 @@ class PepsiDetectorNode(Node):
         self.image_sub = self.create_subscription(
             CompressedImage,
             'camera/image_raw/compressed',
+            #'/robot_interfaces/compressed',
             self.image_callback,
             10
         )

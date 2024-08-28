@@ -1,34 +1,62 @@
-# Start with a base image
-FROM ubuntu:22.04
+# Stage 1: Install Python dependencies
+FROM python:3.9-slim AS python-base
 
-# Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
+# Install PyTorch and its dependencies
+RUN pip install --no-cache-dir \
+    torch==1.9.0+cpu \
+    torchvision==0.10.0+cpu \
+    torchaudio==0.9.0 \
+    -f https://download.pytorch.org/whl/torch_stable.html
+
+# Install Ultralytics
+RUN pip install --no-cache-dir ultralytics
+
+# Stage 2: Official ROS 2 Galactic base image
+FROM ros:galactic-ros-base
+
+# Install additional dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ros-${ROS_DISTRO}-cv-bridge \
+    ros-${ROS_DISTRO}-image-transport \
+    ros-${ROS_DISTRO}-geometry-msgs \
+    ros-${ROS_DISTRO}-sensor-msgs \
+    ros-${ROS_DISTRO}-rclpy \
+    ros-${ROS_DISTRO}-laser-proc \
+    python3.9 \
+    python3.9-dev \
     build-essential \
     cmake \
     git \
-    curl \
-    wget \
-    python3 \
-    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a working directory
-WORKDIR /app
 
-# Copy files into the container
-COPY . /app
 
-# Install Python dependencies (if applicable)
-RUN pip3 install --no-cache-dir -r requirements.txt
+# Copy Python packages from the first stage
+COPY --from=python-base /usr/local/lib/python3.9 /usr/local/lib/python3.9
+COPY --from=python-base /usr/local/bin /usr/local/bin
 
-# Build your project (if applicable)
-# RUN make or cmake ..
 
-# Set the command to run your application
-CMD ["./your_executable"]
+# Create a workspace
+WORKDIR /ros2_ws/src
 
-# Or for a Python app, you might use:
-# CMD ["python3", "your_script.py"]
+# Copy ROS 2 package into the workspace
+COPY ./src/pepsi_detector .
+
+# Build the workspace
+WORKDIR /ros2_ws
+RUN . /opt/ros/${ROS_DISTRO}/setup.sh && colcon build
+
+# Source the workspace
+RUN echo "source /ros2_ws/install/setup.bash" >> /root/.bashrc
+
+# Set the entrypoint
+ENTRYPOINT ["/ros_entrypoint.sh"]
+
+
+# Default command: Run your node, replace with the appropriate command
+CMD ["bash", "-c", "source /ros2_ws/install/setup.bash && ros2 launch pepsi_detector pepsi_detection_launch.py"]

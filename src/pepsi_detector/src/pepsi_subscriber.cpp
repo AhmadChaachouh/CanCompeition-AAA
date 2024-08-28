@@ -12,9 +12,13 @@ public:
     {
         using namespace std::placeholders;
 
-        // Create a subscription to LaserScan
+        //Create a subscription to LaserScan
         laser_scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-            "scan", 10, std::bind(&RobotController::laser_scan_callback, this, _1));
+            "scan",10, std::bind(&RobotController::laser_scan_callback, this, _1)); //"scan"
+
+        // subscription_ = this->create_subscription<std_msgs::msg::Float32>(
+        //     "/distanceToObstacle", 10, 
+        //     std::bind(&RobotController::distance_callback, this, std::placeholders::_1));
 
         // Create a subscription to the Pepsi coordinates
         pepsi_coord_sub_ = this->create_subscription<std_msgs::msg::Float32>(
@@ -43,10 +47,12 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr pepsi_coord_sub_;
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr pepsi_status_sub_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+    rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr subscription_;
 
     float center_x ;
     float rotation_speed ;
     float min_distance_threshold ;
+    float distance_to_obstacle = -1;
 
     // LaserScan variables
     std::vector<float> laser_scan_ranges_;
@@ -70,6 +76,11 @@ private:
         RCLCPP_INFO(this->get_logger(), "Pepsi found status: %s", pepsi_found_ ? "true" : "false");
         control_robot();
     }
+    void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
+    {
+        distance_to_obstacle = msg->data;
+        RCLCPP_INFO(this->get_logger(), "Distance to obstacle: %f meters", distance_to_obstacle);
+    }
 
     void laser_scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
     {
@@ -78,12 +89,7 @@ private:
         angle_max_ = msg->angle_max;
         angle_increment_ = msg->angle_increment;
 
-        // Optional: Process laser scan data if needed
-        // Example: find minimum distance
-        if (!laser_scan_ranges_.empty()) {
-            float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
-            RCLCPP_INFO(this->get_logger(), "Minimum distance from LaserScan: %.2f meters", min_distance);
-        }
+        
     }
 
     void control_robot()
@@ -92,20 +98,28 @@ private:
     
 
     // Check if the robot is too close to any obstacle
-    if (!laser_scan_ranges_.empty()) {
+    if (distance_to_obstacle != -1) {
+        //float min_distance = distance_to_obstacle;
         float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
 
         if (min_distance < min_distance_threshold) {
             // Stop the robot if it's too close to an obstacle
             cmd.linear.x = 0.0;
             cmd.angular.z = 0.0;
+            if (x_center_ < center_x - 20) {
+                    cmd.angular.z = 0.05;
+                } else if (x_center_ > center_x + 20) {
+                    cmd.angular.z = -0.05;
+                } else {
+                    cmd.angular.z = 0.0;
+            }
         } else {
             // If Pepsi can is found
             if (pepsi_found_) {
-                if (x_center_ < center_x - 100) {
-                    cmd.angular.z = rotation_speed - 0.2;
-                } else if (x_center_ > center_x + 100) {
-                    cmd.angular.z = -rotation_speed + 0.2;
+                if (x_center_ < center_x - 50) {
+                    cmd.angular.z = 0.1;
+                } else if (x_center_ > center_x + 50) {
+                    cmd.angular.z = -0.1;
                 } else {
                     cmd.angular.z = 0.0;
                 }
