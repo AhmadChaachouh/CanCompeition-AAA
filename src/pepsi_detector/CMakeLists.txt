@@ -28,9 +28,20 @@ ament_target_dependencies(pepsi_subscriber
   std_msgs
 )
 
+add_executable(qr_code_subscriber src/qr_code_subscriber.cpp)
+
+# Specify dependencies for the qr_code_subscriber executable
+ament_target_dependencies(qr_code_subscriber
+  rclcpp
+  sensor_msgs
+  geometry_msgs
+  std_msgs
+)
+
 # Install the executable
 install(TARGETS
   pepsi_subscriber
+  qr_code_subscriber
   DESTINATION lib/${PROJECT_NAME})
 
 
@@ -64,6 +75,7 @@ install(PROGRAMS
   src/test.py
   src/publish.py
   src/pepsi_publisher.py
+  src/qr_code_detector.py
   DESTINATION lib/${PROJECT_NAME}
 )
 install(DIRECTORY weights/

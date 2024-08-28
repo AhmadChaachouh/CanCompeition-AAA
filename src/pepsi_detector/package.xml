@@ -28,6 +28,7 @@
 
   <export>
     <launchfile path="launch/pepsi_detection_launch.py"/>
+    <launchfile path="launch/qr_code_launch.py"/>
     <build_type>ament_cmake</build_type>
   </export>
 </package>
