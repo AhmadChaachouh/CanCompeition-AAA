@@ -57,20 +57,20 @@ class QRCodeDetector(Node):
                 return
 
         # Adjust the robot's movement based on QR code position and size
-        if qr_width >= self.qr_proximity_threshold:
-            # Stop when QR code is close enough
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
+        # if qr_width >= self.qr_proximity_threshold:
+        #     # Stop when QR code is close enough
+        #     twist.linear.x = 0.0
+        #     twist.angular.z = 0.0
+        # else:
+        # Move towards the QR code
+        if x_center < frame_center - 100:
+            twist.angular.z = 0.2
+        elif x_center > frame_center + 100:
+            twist.angular.z = -0.2
         else:
-            # Move towards the QR code
-            if x_center < frame_center - 20:
-                twist.angular.z = 0.2
-            elif x_center > frame_center + 20:
-                twist.angular.z = -0.2
-            else:
-                twist.angular.z = 0.0
-                twist.linear.x = 0.5
-    
+            twist.angular.z = 0.0
+            twist.linear.x = 0.5
+
         self.cmd_pub.publish(twist)
         
     def search_for_qr_code(self):
