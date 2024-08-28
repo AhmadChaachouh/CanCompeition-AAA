@@ -36,7 +36,7 @@ public:
         // Declare parameters with default values
         this->declare_parameter<float>("center_x", 960.0);
         this->declare_parameter<float>("rotation_speed", 0.3);
-        this->declare_parameter<float>("min_distance_threshold", 6);
+        this->declare_parameter<float>("min_distance_threshold", 0.6);
 
         // Get the parameter values
         this->get_parameter("center_x", center_x);
@@ -69,14 +69,14 @@ private:
     void pepsi_coordinates_callback(const std_msgs::msg::Float32::SharedPtr msg)
     {
         x_center_ = msg->data;
-        RCLCPP_INFO(this->get_logger(), "Received x_center: %f", x_center_);
+        //RCLCPP_INFO(this->get_logger(), "Received x_center: %f", x_center_);
         control_robot();
     }
 
     void pepsi_status_callback(const std_msgs::msg::Bool::SharedPtr msg)
     {
         pepsi_found_ = msg->data;
-        RCLCPP_INFO(this->get_logger(), "Pepsi found status: %s", pepsi_found_ ? "true" : "false");
+        //RCLCPP_INFO(this->get_logger(), "Pepsi found status: %s", pepsi_found_ ? "true" : "false");
         control_robot();
     }
     // void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
@@ -116,6 +116,7 @@ private:
                 } else {
                     cmd.angular.z = 0.0;
                     // SUCCESS
+                    RCLCPP_INFO(this->get_logger(), "SUCCESS");
                     std_msgs::msg::Bool bool_msg;
                     bool_msg.data = true;
                     tree_pub_->publish(bool_msg);

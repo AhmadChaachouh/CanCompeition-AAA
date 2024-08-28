@@ -18,9 +18,14 @@ DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &confi
     can_detected = false;
 }
 
-void DetectCan::treeCallback(const std_msgs::msg::Bool::SharedPtr msg){
+BT::NodeStatus DetectCan::treeCallback(const std_msgs::msg::Bool::SharedPtr msg){
     bool ccan_detected = msg->data;
     can_detected = ccan_detected;
+    
+    return BT::NodeStatus::SUCCESS;
+    
+    
+    
 }
 
 BT::PortsList DetectCan::providedPorts()
