@@ -1,7 +1,7 @@
-#include "behavior-tree/detect_can.hpp"
+#include "../include/behavior-tree/detect_can.hpp"
 
 DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &config)
-    : BT::ActionNodeBase(name, config)
+    : BT::SyncActionNode(name, config)
 {
     node_ = rclcpp::Node::make_shared("detect_can");
 
@@ -17,7 +17,7 @@ DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &confi
 
 BT::PortsList DetectCan::providedPorts()
 {
-    return {BT::OutputPort<bool>("is_can_detected")};
+    return {};
 }
 
 // void DetectCan::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
@@ -56,7 +56,7 @@ BT::NodeStatus DetectCan::tick()
     // Spin the ROS node to handle image processing
     rclcpp::spin_some(node_);
     RCLCPP_INFO(node_->get_logger(), "Can detected by detector");
-    BT::TreeNode::setOutput("is_can_detected", this->can_detected);
+    // BT::TreeNode::setOutput("is_can_detected", this->can_detected);
     return BT::NodeStatus::SUCCESS;
 }
 

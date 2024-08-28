@@ -3,13 +3,11 @@
         <Fallback>
             <Sequence>
                 <Fallback>
-                    <Action ID="DetectCan" is_can_detected="{can}"/>
-                    <Condition ID="CanDetected" is_can_detected="{can}"/>
+                    <Action ID="DetectCan"/>
                 </Fallback>
                 <Sequence>
                     <Fallback>
-                        <Condition ID="CanApproached"/>
-                            <Action ID="ApproachCan"/>
+                        <Action ID="ApproachCan"/>
                     </Fallback>
                     <!-- <Fallback Name="GrabCan">
                         <Condition ID="CanGripped"/>

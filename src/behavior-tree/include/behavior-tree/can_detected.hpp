@@ -1,18 +1,18 @@
-#ifndef CAN_DETECTED_HPP_
-#define CAN_DETECTED_HPP_
+// #ifndef CAN_DETECTED_HPP_
+// #define CAN_DETECTED_HPP_
 
-#include <behaviortree_cpp_v3/bt_factory.h>
+// #include <behaviortree_cpp_v3/bt_factory.h>
 
-class CanDetected : public BT::ConditionNode
-{
-public:
-    CanDetected(const std::string &name, const BT::NodeConfiguration &config);
+// class CanDetected : public BT::ConditionNode
+// {
+// public:
+//     CanDetected(const std::string &name, const BT::NodeConfiguration &config);
 
-    static BT::PortsList providedPorts();
+//     static BT::PortsList providedPorts();
 
-    BT::NodeStatus tick() override;
+//     BT::NodeStatus tick() override;
 
-    bool can_detected;
-};
+//     bool can_detected;
+// };
 
-#endif // CAN_DETECTED_HPP_
+// #endif // CAN_DETECTED_HPP_
