@@ -68,8 +68,8 @@ class QRCodeDetectorNode(Node):
         self.get_logger().info(f'Publishing detected: {detected}')
 
         # Display the annotated image
-        cv2.imshow("Detected QR Code", cv_image)
-        cv2.waitKey(1)
+        # cv2.imshow("Detected QR Code", cv_image)
+        # cv2.waitKey(1)
 
 def main(args=None):
     rclpy.init(args=args)

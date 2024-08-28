@@ -106,10 +106,10 @@ private:
             // Stop the robot if it's too close to an obstacle
             cmd.linear.x = 0.0;
             cmd.angular.z = 0.0;
-            if (x_center_ < center_x - 50) {
-                    cmd.angular.z = 0.05;
-                } else if (x_center_ > center_x + 50) {
-                    cmd.angular.z = -0.05;
+            if (x_center_ < center_x - 40) {
+                    cmd.angular.z = 0.01;
+                } else if (x_center_ > center_x + 40) {
+                    cmd.angular.z = -0.01;
                 } else {
                     cmd.angular.z = 0.0;
             }
