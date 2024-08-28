@@ -39,7 +39,6 @@ class PepsiDetectorNode(Node):
         
         # Create a publisher for the detection status
         self.pepsi_detected_pub = self.create_publisher(Bool, 'pepsi_detected', 10)
-        S
         # Variables
         self.target_x = None
 

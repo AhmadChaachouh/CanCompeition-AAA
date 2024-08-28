@@ -26,6 +26,16 @@ public:
         // Create a publisher for velocity commands
         cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
 
+        // Declare parameters with default values
+        this->declare_parameter<float>("center_x", 960.0);
+        this->declare_parameter<float>("rotation_speed", 0.3);
+        this->declare_parameter<float>("min_distance_threshold", 0.6);
+
+        // Get the parameter values
+        this->get_parameter("center_x", center_x);
+        this->get_parameter("rotation_speed", rotation_speed);
+        this->get_parameter("min_distance_threshold", min_distance_threshold);
+
         // Initialize variables
         qr_found_ = false;
         x_center_ = 0.0;
@@ -40,6 +50,10 @@ private:
     float x_center_;
     bool qr_found_;
     std::vector<float> laser_scan_ranges_;
+
+    float center_x;  // Adjust based on your camera resolution
+    float rotation_speed;
+    float min_distance_threshold;  // Threshold distance for stopping
 
     void qr_coordinates_callback(const std_msgs::msg::Float32::SharedPtr msg)
     {
@@ -67,9 +81,9 @@ private:
     void control_robot()
     {
         auto cmd = geometry_msgs::msg::Twist();
-        float center_x = 1920 / 2;  // Adjust based on your camera resolution
-        float rotation_speed = 0.3;
-        float min_distance_threshold = 0.6;  // Threshold distance for stopping
+        // float center_x = 1920 / 2;  // Adjust based on your camera resolution
+        // float rotation_speed = 0.3;
+        // float min_distance_threshold = 0.6;  // Threshold distance for stopping
 
         // Check if the robot is too close to any obstacle
         if (!laser_scan_ranges_.empty()) {
@@ -82,12 +96,12 @@ private:
             } else {
                 // If QR code is found
                 if (qr_found_) {
-                    if (x_center_ < center_x - 100) {
+                    if (x_center_ < center_x - 50) {
                         // QR code is to the left; rotate left
-                        cmd.angular.z = rotation_speed - 0.2;
-                    } else if (x_center_ > center_x + 100) {
+                        cmd.angular.z = 0.1;
+                    } else if (x_center_ > center_x + 50) {
                         // QR code is to the right; rotate right
-                        cmd.angular.z = -rotation_speed + 0.2;
+                        cmd.angular.z = -0.1;
                     } else {
                         // QR code is centered; stop rotating
                         cmd.angular.z = 0.0;
