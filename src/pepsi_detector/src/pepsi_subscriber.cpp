@@ -76,11 +76,11 @@ private:
         RCLCPP_INFO(this->get_logger(), "Pepsi found status: %s", pepsi_found_ ? "true" : "false");
         control_robot();
     }
-    void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
-    {
-        distance_to_obstacle = msg->data;
-        RCLCPP_INFO(this->get_logger(), "Distance to obstacle: %f meters", distance_to_obstacle);
-    }
+    // void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
+    // {
+    //     distance_to_obstacle = msg->data;
+    //     RCLCPP_INFO(this->get_logger(), "Distance to obstacle: %f meters", distance_to_obstacle);
+    // }
 
     void laser_scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
     {
@@ -96,9 +96,9 @@ private:
 {
     auto cmd = geometry_msgs::msg::Twist();
     
-
+    //distance_to_obstacle != -1)
     // Check if the robot is too close to any obstacle
-    if (distance_to_obstacle != -1) {
+    if (!laser_scan_ranges_.empty()) {
         //float min_distance = distance_to_obstacle;
         float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
 
@@ -106,9 +106,9 @@ private:
             // Stop the robot if it's too close to an obstacle
             cmd.linear.x = 0.0;
             cmd.angular.z = 0.0;
-            if (x_center_ < center_x - 20) {
+            if (x_center_ < center_x - 50) {
                     cmd.angular.z = 0.05;
-                } else if (x_center_ > center_x + 20) {
+                } else if (x_center_ > center_x + 50) {
                     cmd.angular.z = -0.05;
                 } else {
                     cmd.angular.z = 0.0;
