@@ -1,0 +1,5 @@
+# config.yaml
+pepsi_detector:
+  center_x: 960.0  # 1920 / 2
+  rotation_speed: 0.3
+  min_distance_threshold: 0.6

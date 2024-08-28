@@ -8,13 +8,19 @@ from cv_bridge import CvBridge
 from ultralytics import YOLO
 import cv2
 import numpy as np
+import os
+import ament_index_python
 
 class PepsiDetectorNode(Node):
     def __init__(self):
         super().__init__('pepsi_detector_node')
 
+        package_name = 'pepsi_detector'  # Replace with your package name
+        package_share_directory = ament_index_python.get_package_share_directory(package_name)
+        model_path = os.path.join(package_share_directory, 'weights', 'best-v8n.onnx')
+
         # Initialize YOLOv8 model
-        self.model = YOLO("/home/anthony/Downloads/best-v8n.onnx", task='detect')
+        self.model = YOLO(model_path, task='detect')
 
         # Initialize CvBridge
         self.bridge = CvBridge()
@@ -23,6 +29,7 @@ class PepsiDetectorNode(Node):
         self.image_sub = self.create_subscription(
             CompressedImage,
             'camera/image_raw/compressed',
+            #'/robot_interfaces/compressed',
             self.image_callback,
             10
         )
@@ -66,8 +73,8 @@ class PepsiDetectorNode(Node):
         self.pepsi_detected_pub.publish(detected_msg)
         self.get_logger().info(f'Publishing detected: {detected}')
 
-        cv2.imshow("Detected Pepsi Can", annotated_image)
-        cv2.waitKey(1)
+        # cv2.imshow("Detected Pepsi Can", annotated_image)
+        # cv2.waitKey(1)
 
 def main(args=None):
     rclpy.init(args=args)
