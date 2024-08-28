@@ -15,7 +15,7 @@ find_package(std_msgs REQUIRED)  # Add this line
 
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
-find_package(pepsi_detection_interface REQUIRED)
+# find_package(pepsi_detection_interface REQUIRED)
 
 # Add executable
 add_executable(pepsi_subscriber src/pepsi_subscriber.cpp)
