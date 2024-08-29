@@ -103,13 +103,13 @@ private:
     auto cmd = geometry_msgs::msg::Twist();
     auto stp =  std_msgs::msg::Bool();
     
-    //distance_to_obstacle != -1)
+    //(distance_to_obstacle != -1)
     // Check if the robot is too close to any obstacle
-    if (!laser_scan_ranges_.empty()) {
+    if (!laser_scan_ranges_.empty() ) {
         //float min_distance = distance_to_obstacle;
-        float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
+        float min_distance = laser_scan_ranges_[0];
 
-        if (min_distance < min_distance_threshold ) {
+        if (min_distance < min_distance_threshold && pepsi_found_ == true) {
             // Stop the robot if it's too close to an obstacle
             cmd.linear.x = 0.0;
             cmd.angular.z = 0.0;

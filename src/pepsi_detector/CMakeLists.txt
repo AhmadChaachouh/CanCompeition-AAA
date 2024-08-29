@@ -46,34 +46,8 @@ install(TARGETS
 
 
 
-# # Declare the executable
-# add_executable(pepsi-action src/pepsi-action.cpp)
-# ament_export_dependencies(rclcpp rclcpp_action sensor_msgs geometry_msgs pepsi_detection_interface)
-
-# # Link dependencies
-# ament_target_dependencies(pepsi-action
-#   rclcpp
-#   rclcpp_action
-#   sensor_msgs
-#   geometry_msgs
-#   pepsi_detection_interface
-# )
-
-
-
-
-
-# # Install the executable
-
-# install(TARGETS
-#  pepsi-action
-#  DESTINATION lib/${PROJECT_NAME}
-# )
-
 install(PROGRAMS
-  src/pepsi_detector_node.py
-  src/test.py
-  src/publish.py
+  
   src/pepsi_publisher.py
   src/qr_code_detector.py
   DESTINATION lib/${PROJECT_NAME}
