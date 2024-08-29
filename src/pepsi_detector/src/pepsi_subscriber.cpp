@@ -13,12 +13,12 @@ public:
         using namespace std::placeholders;
 
         //Create a subscription to LaserScan
-        laser_scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-            "scan",10, std::bind(&RobotController::laser_scan_callback, this, _1)); //"scan"
+        // laser_scan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
+        //     "scan",10, std::bind(&RobotController::laser_scan_callback, this, _1)); //"scan"
 
-        // subscription_ = this->create_subscription<std_msgs::msg::Float32>(
-        //     "/distanceToObstacle", 10, 
-        //     std::bind(&RobotController::distance_callback, this, std::placeholders::_1));
+        subscription_ = this->create_subscription<std_msgs::msg::Float32>(
+            "/distanceToObstacle", 10, 
+            std::bind(&RobotController::distance_callback, this, std::placeholders::_1));
 
         // Create a subscription to the Pepsi coordinates
         pepsi_coord_sub_ = this->create_subscription<std_msgs::msg::Float32>(
@@ -82,21 +82,21 @@ private:
         //RCLCPP_INFO(this->get_logger(), "Pepsi found status: %s", pepsi_found_ ? "true" : "false");
         control_robot();
     }
-    // void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
-    // {
-    //     distance_to_obstacle = msg->data;
-    //     RCLCPP_INFO(this->get_logger(), "Distance to obstacle: %f meters", distance_to_obstacle);
-    // }
-
-    void laser_scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
+    void distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
     {
-        laser_scan_ranges_ = msg->ranges;
-        angle_min_ = msg->angle_min;
-        angle_max_ = msg->angle_max;
-        angle_increment_ = msg->angle_increment;
+        distance_to_obstacle = msg->data;
+        RCLCPP_INFO(this->get_logger(), "Distance to obstacle: %f meters", distance_to_obstacle);
+    }
+
+    // void laser_scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
+    // {
+    //     laser_scan_ranges_ = msg->ranges;
+    //     angle_min_ = msg->angle_min;
+    //     angle_max_ = msg->angle_max;
+    //     angle_increment_ = msg->angle_increment;
 
         
-    }
+    // }
 
     void control_robot()
 {
@@ -106,8 +106,8 @@ private:
     //distance_to_obstacle != -1)
     // Check if the robot is too close to any obstacle
     if (!laser_scan_ranges_.empty()) {
-        //float min_distance = distance_to_obstacle;
-        float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
+        float min_distance = distance_to_obstacle;
+        // float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
 
         if (min_distance < min_distance_threshold ) {
             // Stop the robot if it's too close to an obstacle
