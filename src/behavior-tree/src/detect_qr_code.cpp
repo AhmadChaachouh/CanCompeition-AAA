@@ -67,12 +67,7 @@ BT::NodeStatus DetectQRCode::tick()
     int result = std::system(command.c_str());
 
     // Check if the launch was successful
-    if (result != 0)
-    {
-        RCLCPP_INFO(node_->get_logger(), "Failed to launch QR file: ...");
-        // std::cerr << "Failed to launch file: " << command << std::endl;
-        return BT::NodeStatus::FAILURE;
-    }
+    
 
     // // Spin the ROS node to handle image processing
     // rclcpp::spin_some(node_);

@@ -29,7 +29,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr tree_sub_;
     std::string input_msg_;
     bool can_detected;
-    BT::NodeStatus treeCallback(const std_msgs::msg::Bool::SharedPtr msg);
+    void treeCallback(const std_msgs::msg::Bool::SharedPtr msg);
 };
 
 #endif // DETECT_CAN_HPP_

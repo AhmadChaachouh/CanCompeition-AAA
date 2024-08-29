@@ -34,6 +34,13 @@ class PepsiDetectorNode(Node):
             10
         )
 
+        self.python_sub = self.create_subscription(
+            Bool,
+            'python_off',
+            self.python_callback,
+            10
+        )
+
         # Create a publisher for the x_center coordinate
         self.x_center_pub = self.create_publisher(Float32, 'pepsi_coordinates', 10)
         
@@ -74,6 +81,9 @@ class PepsiDetectorNode(Node):
 
         # cv2.imshow("Detected Pepsi Can", annotated_image)
         # cv2.waitKey(1)
+
+    def python_callback(self, msg):
+        rclpy.shutdown()   
 
 def main(args=None):
     rclpy.init(args=args)

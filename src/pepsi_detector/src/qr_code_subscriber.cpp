@@ -29,7 +29,7 @@ public:
         // Declare parameters with default values
         this->declare_parameter<float>("center_x", 960.0);
         this->declare_parameter<float>("rotation_speed", 0.3);
-        this->declare_parameter<float>("min_distance_threshold", 0.6);
+        this->declare_parameter<float>("min_distance_threshold", 1);
 
         // Get the parameter values
         this->get_parameter("center_x", center_x);
@@ -54,7 +54,7 @@ private:
     float center_x;  // Adjust based on your camera resolution
     float rotation_speed;
     float min_distance_threshold;  // Threshold distance for stopping
-
+    float min_distance;
     void qr_coordinates_callback(const std_msgs::msg::Float32::SharedPtr msg)
     {
         x_center_ = msg->data;
@@ -87,9 +87,9 @@ private:
 
         // Check if the robot is too close to any obstacle
         if (!laser_scan_ranges_.empty()) {
-            float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
+            float min_distance = laser_scan_ranges_[0];
 
-            if (min_distance < min_distance_threshold) {
+            if (min_distance < min_distance_threshold && qr_found_  == true) {
                 // Stop the robot if it's too close to an obstacle
                 cmd.linear.x = 0.0;
                 cmd.angular.z = 0.0;

@@ -18,14 +18,10 @@ DetectCan::DetectCan(const std::string &name, const BT::NodeConfiguration &confi
     can_detected = false;
 }
 
-BT::NodeStatus DetectCan::treeCallback(const std_msgs::msg::Bool::SharedPtr msg){
+void DetectCan::treeCallback(const std_msgs::msg::Bool::SharedPtr msg){
     bool ccan_detected = msg->data;
     can_detected = ccan_detected;
-    
-    return BT::NodeStatus::SUCCESS;
-    
-    
-    
+        
 }
 
 BT::PortsList DetectCan::providedPorts()
@@ -77,28 +73,34 @@ BT::NodeStatus DetectCan::tick()
     // std::cout << "Launching file: " << command << std::endl;
 
     // Launch the file using system call
-    int result = std::system(command.c_str());
+   int result = std::system(command.c_str());
+
+    RCLCPP_INFO(node_->get_logger(), "After launch......................................");
 
     // Check if the launch was successful
-    if (result != 0)
-    {
-        RCLCPP_INFO(node_->get_logger(), "Failed to launch file: ...");
-        // std::cerr << "Failed to launch file: " << command << std::endl;
-        return BT::NodeStatus::FAILURE;
-    }
+    // if (result != 0)
+    // {
+    //     RCLCPP_INFO(node_->get_logger(), "Failed to launch file: ...");
+    //     // std::cerr << "Failed to launch file: " << command << std::endl;
+    //     return BT::NodeStatus::FAILURE;
+    // }
 
+    // if (result == 0){
+    //     return BT::NodeStatus::SUCCESS;
+    // }
 
-    while(!can_detected){
-        RCLCPP_INFO(node_->get_logger(), "Waiting for can detection...");
-        continue;
-    }
+    return BT::NodeStatus::SUCCESS;
+    // while(!can_detected){
+    //     RCLCPP_INFO(node_->get_logger(), "Waiting for can detection...");
+    //     continue;
+    // }
     
-    if (can_detected){
-        return BT::NodeStatus::SUCCESS;
-    }
-    else{
-        return BT::NodeStatus::FAILURE;
-    }
+    // if (can_detected){
+    //     return BT::NodeStatus::SUCCESS;
+    // }
+    // else{
+    //     return BT::NodeStatus::FAILURE;
+    // }
 
     // // Spin the ROS node to handle image processing
     // rclcpp::spin_some(node_);

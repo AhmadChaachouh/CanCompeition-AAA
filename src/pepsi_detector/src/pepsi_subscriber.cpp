@@ -33,6 +33,8 @@ public:
 
         tree_pub_ = this->create_publisher<std_msgs::msg::Bool>("can_status", 10);
 
+        python_pub_= this->create_publisher<std_msgs::msg::Bool>("python_off", 10);
+
         // Declare parameters with default values
         this->declare_parameter<float>("center_x", 960.0);
         this->declare_parameter<float>("rotation_speed", 0.3);
@@ -51,6 +53,7 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr tree_pub_;
     rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr subscription_;
+    rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr python_pub_;
 
     float center_x ;
     float rotation_speed ;
@@ -98,6 +101,7 @@ private:
     void control_robot()
 {
     auto cmd = geometry_msgs::msg::Twist();
+    auto stp =  std_msgs::msg::Bool();
     
     //distance_to_obstacle != -1)
     // Check if the robot is too close to any obstacle
@@ -105,23 +109,29 @@ private:
         //float min_distance = distance_to_obstacle;
         float min_distance = *std::min_element(laser_scan_ranges_.begin(), laser_scan_ranges_.end());
 
-        if (min_distance < min_distance_threshold) {
+        if (min_distance < min_distance_threshold ) {
             // Stop the robot if it's too close to an obstacle
             cmd.linear.x = 0.0;
             cmd.angular.z = 0.0;
+
             if (x_center_ < center_x - 40) {
                     cmd.angular.z = 0.01;
-                } else if (x_center_ > center_x + 40) {
+            } else if (x_center_ > center_x + 40) {
                     cmd.angular.z = -0.01;
-                } else {
+            } else {
                     cmd.angular.z = 0.0;
                     // SUCCESS
+                    stp.data = true;
+                    python_pub_->publish(stp);
                     RCLCPP_INFO(this->get_logger(), "SUCCESS");
                     std_msgs::msg::Bool bool_msg;
                     bool_msg.data = true;
                     tree_pub_->publish(bool_msg);
+                    rclcpp::shutdown();
             }
-        } else {
+        } 
+
+            else {
             // If Pepsi can is found
             if (pepsi_found_) {
                 if (x_center_ < center_x - 50) {
@@ -130,6 +140,7 @@ private:
                     cmd.angular.z = -0.1;
                 } else {
                     cmd.angular.z = 0.0;
+                   
                 }
 
                 // Move forward if aligned
