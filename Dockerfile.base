@@ -1,0 +1,36 @@
+# Dockerfile.base
+FROM ros:galactic  
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3-pip python3-opencv libopencv-dev git \
+    ros-galactic-cv-bridge ros-galactic-image-transport \
+    ros-galactic-rclcpp \
+    ros-galactic-control-msgs \
+    ros-galactic-behaviortree-cpp-v3 \
+    python3-colcon-common-extensions \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up the workspace
+WORKDIR /ros_ws
+COPY ./src ./src
+COPY requirements.txt /ros_ws/requirements.txt
+
+# Install Python dependencies from requirements.txt using Tsinghua mirror
+RUN pip3 install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r /ros_ws/requirements.txt
+
+# Install ultralytics with CPU-only support
+RUN pip3 install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple ultralytics
+
+# Build the ROS workspace
+RUN /bin/bash -c "source /opt/ros/galactic/setup.bash && colcon build"
+
+# Environment setup
+ENV ROS_DISTRO=galactic
+ENV ROS_DOMAIN_ID=15
+RUN echo "source /ros_ws/install/setup.bash" >> ~/.bashrc
+
+
+# Set entrypoint to source the ROS setup script
+ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/galactic/setup.bash && source /ros_ws/install/setup.bash "]
